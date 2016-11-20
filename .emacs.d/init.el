@@ -1,5 +1,5 @@
 ;;关闭开始欢迎页
-(setq inhibit-splash-screen t)
+(setq inhibit-startup-screen t)
 
 (add-to-list 'load-path "~/.emacs.d/my-emacs-config")
 
