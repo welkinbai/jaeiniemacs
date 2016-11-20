@@ -1,42 +1,20 @@
+(add-to-list 'load-path "~/.emacs.d/my-emacs-config")
+(require 'init-package)
 
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-    )
-
-(require 'cl)
-
-;;add whatever packages you want here
-(defvar welkinbai/packages '(
-				 company
-				 monokai-theme				   
-				   )  "Default packages")
-
-(setq package-selected-packages zilongshanren/packages)
-
-(defun welkinbai/packages-installed-p ()
-    (loop for pkg in welkinbai/packages
-          when (not (package-installed-p pkg)) do (return nil)
-          finally (return t)))
-
-(unless (welkinbai/packages-installed-p)
-    (message "%s" "Refreshing package database...")
-    (package-refresh-contents)
-    (dolist (pkg welkinbai/packages)
-      (when (not (package-installed-p pkg))
-        (package-install pkg))))
-
+;;关掉鼠标滚轮到文件开始结尾处的提示音
+(setq ring-bell-function 'ignore)
 ;;关闭工具栏
 (tool-bar-mode -1)
 ;;关闭侧边滚动条
 (scroll-bar-mode -1)
 ;;开启行号
-(linum-mode t)
+(global-linum-mode t)
 ;;关闭开始欢迎页
 (setq inhibit-splash-screen t)
 ;;选中一块东西然后敲其他东西会覆盖的模式
 (delete-selection-mode t)
+;;好像是自动加载文件修改
+(global-auto-revert-mode t)
 
 (require 'recentf)
 (recentf-mode t)
@@ -50,11 +28,12 @@
 ;;绑定快捷键到上面定义的函数
 (global-set-key (kbd "<f4>") 'open-my-init-file)
 
-;;开启company自动补全
-(global-company-mode t)
+
+
 
 ;;关闭自动备份文件
 (setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;;定义字体集
 (set-fontset-font "fontset-default"
