@@ -12,6 +12,9 @@
 				 company
 				 monokai-theme
 				 popwin
+				 swiper
+				 counsel
+				 org-pomodoro				 
 				   )  "Default packages")
 
 (setq package-selected-packages welkinbai/packages)
@@ -35,5 +38,9 @@
 ;;自动跳光标到新打开的窗口里
 (require 'popwin)
 (popwin-mode t)
+
+;;启动C-x C-j快捷键来打开当前buffer的路径的dir mode
+(require 'dired-x)
+
 
 (provide 'init-package)
