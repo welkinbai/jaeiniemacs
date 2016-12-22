@@ -1,4 +1,5 @@
-
+;;关闭菜单栏
+(menu-bar-mode -1)
 ;;关闭工具栏
 (tool-bar-mode -1)
 ;;关闭侧边滚动条
@@ -8,7 +9,9 @@
 
 ;;定义字体集
 (set-fontset-font "fontset-default"
-      'gb18030 '("Microsoft YaHei" . "unicode-bmp"))
+		  'gb18030 '("Microsoft YaHei" . "unicode-bmp"))
+;;设置默认的字符集
+(set-language-environment "UTF-8")
 ;;高亮当前行
 (global-hl-line-mode t)
 ;;打开自动全屏

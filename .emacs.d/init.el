@@ -8,6 +8,7 @@
 (require 'init-batter-defaults)
 (require 'init-myfunc)
 (require 'init-keybinding)
+(require 'init-org-mode)
 
 (setq custom-file (expand-file-name "my-emacs-config/custom.el" user-emacs-directory))
 

@@ -20,6 +20,21 @@
 ;;钩子-给lisp主模式增加括号匹配子模式
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
+;;不要问我yes or no 而是y or n
+(fset 'yes-or-no-p 'y-or-n-p)
 
+;;增强补全
+(setq hippie-expand-try-function-list '(try-expand-debbrev
+					try-expand-debbrev-all-buffers
+					try-expand-debbrev-from-kill
+					try-complete-file-name-partially
+					try-complete-file-name
+					try-expand-all-abbrevs
+					try-expand-list
+					try-expand-line
+					try-complete-lisp-symbol-partially
+					try-complete-lisp-symbol))
+;;两个窗口都打开时，dir mode中的操作会自动提示另一个窗口的路径
+(setq dired-dwim-target t)
 
 (provide 'init-batter-defaults)

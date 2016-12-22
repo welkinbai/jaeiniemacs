@@ -1,0 +1,128 @@
+* 学习笔记
+** 基本操作
+   首先快捷键主要是依赖ctrl+xx或者alt+xxx这样的形式来实现的。
+   以下ctrl用C-来代替，alt用M-来代替，这也是emacs中显示相应快捷键的标准做法
+   
+*** 下面是编辑区的一些基本操作
+    C-f 为前移一个字符， f 代表 forward。
+    C-b 为后移一个字符， b 代表 backward。
+    C-p 为上移至前一行， p 代表 previous。
+    C-n 为上移至下一行， n 代表 next。
+    C-a 为移至行首， a 代表 ahead。
+    C-e 为移至行尾， e 代表 end。
+    
+    C-x 1 仅保留当前窗口
+    C-x 2 分一个窗口到下面
+    C-x 3 分一个窗口到右边
+    
+    C-x o 移动光标到另一个窗口，如果有多个窗口，就循环跳动
+    C-v   当前窗口跳转下一屏
+    C-M-v 另一个窗口跳转下一屏
+    C-x 0 关闭当前窗口
+    C-x 4 0 关闭当前窗口的同时把buffer也关了
+    C-x ^(窗口变高) }（变宽） {（变窄） -(变低，如果不需要那么多行的话) +（重新分配窗口宽度）
+*** 下面是操作文件的一些基本操作
+    C-x C-f 为打开目标文件， f 代表 find/file
+    C-x C-s 为保存当前缓冲区（Buffer）， s 代表 save
+    C-x d 打开dir mode，即文件列表
+    C-x C-j 打开当前文件目录下的dir mode
+    在Dir mode中：
+    + 创建目录
+    g 刷新目录
+    C 拷贝
+    D 删除
+    R 重命名
+    d 标记删除
+    u 取消标记
+    x 执行所有的标记
+    在Dir mode中，你还可以用C-x C-q来启动编辑模式，批量地修改文件名
+*** 取消误操作命令
+    C-g是在任何情况下取消之前误点的快捷键的命令
+    
+*** 帮助命令
+    C-h k 寻找快捷键的帮助信息
+    C-h v 寻找变量的帮助信息
+    C-h f 寻找函数的帮助信息
+    C-h m 可以查看当前打开的所有minor mode（子模式）
+    
+    查看完跳出的临时窗口的内容后，可以按q隐藏窗口
+    
+*** 插件管理器
+    M-x package-list-package 可以打开配置的插件源的所有插件列表
+    M-x customize-group 输入插件名可以打开自定义插件属性的可视化窗口
+*** 浏览器
+M-x eww 地址可以使用内置浏览器访问网页
+M-x eww-open-file 可以打开本地网页
+M-x eww-browse-with-external-browser 在eww模式下使用这个命令可以打开外部浏览器浏览网页
+** Lisp语言相关
+*** 语言基础
+    Lisp是古老的函数式语言
+    所有的操作都由一对括号和三要素进行：
+    (函数名 arg1 arg2 ...)
+    #+BEGIN_SRC emacs-lisp
+  ;;下面是一些例子
+  ;;2+2
+  (+ 2 2)
+  ;;定义变量
+  (setq name "username")
+  ;;定义函数
+  (defun func() (message "hello,%s" name))
+  ;;调用定义的函数
+  (func);->hello,username
+    #+END_SRC
+**** setq和setq-default的区别
+     setq设置的是当前buffer的变量值
+     setq-default设置的是全局的变量值
+**** require语法
+     require语法将加载一个特性，如果这个特性不在特性清单里，将加载同名的文件
+**** cl扩展
+     common lisp扩展可以提供一些额外的语法。
+     首先使用require来载入common lisp包：
+     #+BEGIN_SRC emacs-lisp
+(require 'cl)
+     #+END_SRC
+     然后就可以用一些cl额外的语法了，比如循环：
+     #+BEGIN_SRC emacs-lisp
+(cl-loop for x from 1 to 100
+	 for y = (* x x)
+	 until (>= y 729)
+	 finally return (list x (= y 729)))
+     #+END_SRC
+**** quote单引号的作用
+     quote的意思是不要执行后面的内容，返回它本来的内容：
+     #+BEGIN_SRC emacs-lisp
+(print '(+ 1 1)) ;; -> (+ 1 1)
+(print (+ 1 1))  ;; -> 2
+     #+END_SRC
+     
+*** 常用函数介绍
+**** global-set-key
+     这是用来绑定全局快捷键的函数，第一个参数指定要绑定什么样的快捷键，第二个参数指定要执行的函数
+     #+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "<f1>") 要执行的函数)
+     #+END_SRC
+**** interactive
+     这是一个标识，用来将函数设置为可交互式的函数。
+     只有加了这个标识的函数才能使用全局快捷键来调用
+     #+BEGIN_SRC emacs-lisp
+(defun func()
+  (interactive)
+  (message "Hello, %s" username))
+     #+END_SRC
+     
+**** load-file,load,require,autoload
+     load-file顾名思义就是加载指定的某个文件
+     load则搜索load-path中的路径来找到与文件名匹配的文件
+     require背地里还是调用load来加载文件，但是它会先查看变量features数组中是否已经有了要加载的特性，没有才会加载，有了就不加载。
+     autoload仅在函数调用的时候才加载文件，相当于延迟加载，可节省编辑器启动时间
+*** 常用技巧
+    1.M-x eval-buffer 可以执行当前buffer里面所有的lisp代码
+    2.C-x C-e 执行光标所在行到光标前一格的代码
+** Org-mode相关
+*** 快捷键
+1. 使用C-c ' 可以在代码块中打开一个新的buffer来修改代码块
+2. <s TAB 可以自动插入一个代码块区域
+3. M-回车 可以将有序列表的序号重置，即使你输入成了1,2,4也会为你调整成1,2,3
+4. C-c a 可以打开agenda模式
+5. C-c C-s 在一个todo上面可以创建开始时间
+6. C-c C-d 在一个todo上面可以创建结束时间
