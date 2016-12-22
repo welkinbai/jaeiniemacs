@@ -14,7 +14,8 @@
 				 popwin
 				 swiper
 				 counsel
-				 org-pomodoro				 
+				 org-pomodoro
+				 markdown-mode
 				   )  "Default packages")
 
 (setq package-selected-packages welkinbai/packages)
