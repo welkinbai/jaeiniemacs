@@ -16,6 +16,7 @@
 				 counsel
 				 org-pomodoro
 				 markdown-mode
+				 magit
 				   )  "Default packages")
 
 (setq package-selected-packages welkinbai/packages)
