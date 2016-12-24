@@ -15,8 +15,7 @@
 				 swiper
 				 counsel
 				 org-pomodoro
-				 markdown-mode
-				 magit
+				 markdown-mode				 
 				   )  "Default packages")
 
 (setq package-selected-packages welkinbai/packages)
