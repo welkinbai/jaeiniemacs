@@ -51,6 +51,18 @@
 ;;读取主题
 (load-theme 'monokai t)
 
-
+;;循环透明函数
+(setq alpha-list '((95 65) (85 55) (75 45) (65 35) (100 100)))  
+(defun loop-alpha ()  
+  (interactive)  
+  (let ((h (car alpha-list)))                ;; head value will set to  
+    ((lambda (a ab)  
+       (set-frame-parameter (selected-frame) 'alpha (list a ab))  
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))  
+       ) (car h) (car (cdr h)))  
+    (setq alpha-list (cdr (append alpha-list (list h))))  
+    )  
+)
+(loop-alpha)
 
 (provide 'init-ui)

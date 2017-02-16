@@ -34,5 +34,7 @@
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
+;;循环透明快捷键
+(global-set-key [(f11)] 'loop-alpha)
 
 (provide 'init-keybinding)
