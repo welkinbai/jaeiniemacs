@@ -37,4 +37,7 @@
 ;;循环透明快捷键
 (global-set-key [(f11)] 'loop-alpha)
 
+;;全局搜索快捷键
+(global-set-key [f8] 'deft)
+
 (provide 'init-keybinding)

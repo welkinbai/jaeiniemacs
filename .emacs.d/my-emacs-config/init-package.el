@@ -15,7 +15,8 @@
 				 swiper
 				 counsel
 				 org-pomodoro
-				 markdown-mode				 
+				 markdown-mode
+				 deft
 				   )  "Default packages")
 
 (setq package-selected-packages welkinbai/packages)
@@ -42,6 +43,12 @@
 
 ;;启动C-x C-j快捷键来打开当前buffer的路径的dir mode
 (require 'dired-x)
+
+;;全局搜索
+(require 'deft)
+(setq deft-extensions '("txt" "tex" "org" "md"))
+(setq deft-directory "~/")
+(setq deft-recursive t)
 
 
 (provide 'init-package)
