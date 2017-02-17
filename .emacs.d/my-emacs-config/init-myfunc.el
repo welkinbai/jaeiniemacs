@@ -4,6 +4,11 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+
+(defun open-my-study-file ()
+  (interactive)
+  (find-file "~/learn-node.org"))
+
 ;;自动缩进buffer的函数
 (defun indent-buffer()
   (interactive)

@@ -2,6 +2,8 @@
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 ;;绑定快捷键到打开我的配置文件上
 (global-set-key (kbd "<f4>") 'open-my-init-file)
+;;绑定快捷键到打开我的学习文档上
+(global-set-key (kbd "<f5>") 'open-my-study-file)
 ;;绑定快捷键到自动缩进函数上
 (global-set-key (kbd "C-S-l") 'indent-region-or-buffer)
 ;;绑定增强的自动补全
